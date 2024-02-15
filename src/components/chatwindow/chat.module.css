@@ -8,6 +8,13 @@
   box-shadow: 0px 0px 15px 0px black;
 }
 
+.collapse {
+  height: 50px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+}
+
 .chatHeader {
   height: 60px;
   display: flex;
@@ -16,6 +23,7 @@
   background-color: #0652c0;
   color: var(--light-color);
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .logo {
@@ -36,6 +44,26 @@
 .chatBody {
   height: 300px;
   display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  align-items: flex-end;
+  overflow: hidden;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+}
+
+.chatBody::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chatBody::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+.chatBody::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
 .chatInput {
@@ -52,6 +80,7 @@
 .send {
   flex: 1;
   padding-right: 4px;
+  cursor: pointer;
 }
 
 #textInput {
@@ -62,4 +91,25 @@
   caret-color: black;
   font-size: 1rem;
   width: 100%;
+}
+
+.incoming {
+  padding: 8px;
+  margin: 5px;
+  max-width: 70%;
+  width: max-content;
+  border-radius: 10px 10px 3px 10px;
+  background: #0652c0;
+  color: var(--light-color);
+  align-self: flex-end;
+}
+
+.outgoing {
+  padding: 8px;
+  background: #ccc;
+  max-width: 70%;
+  margin: 5px;
+  width: max-content;
+  border-radius: 10px 3px 10px 10px;
+  align-self: flex-start;
 }
