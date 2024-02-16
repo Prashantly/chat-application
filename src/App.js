@@ -7,10 +7,15 @@ const socket = io('http://localhost:3001')
 function App() {
   const [inputValue, setInputValue] = useState('')
   const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     socket.on('receive_message', (data) => {
       setMessages([...messages, { content: data.message, type: 'incoming' }])
+    })
+
+    socket.on('user_list', (userList) => {
+      setUsers(userList)
     })
 
   }, [messages])
@@ -40,6 +45,7 @@ function App() {
       sendMessage={sendMessage}
       messages={messages}
       handleEnter={handleEnter}
+      users={users}
     />
   );
 }

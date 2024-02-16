@@ -1,24 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from "./chat.module.css"
+import React, { useEffect, useRef, useState } from 'react';
+import styles from "./chat.module.css";
 import 'animate.css';
 
-
-const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter }) => {
-    const [collapse, setCollapase] = useState(true);
+const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter, users }) => {
+    const [collapse, setCollapse] = useState(true);
     const chatBodyRef = useRef(null);
 
     useEffect(() => {
         if (chatBodyRef.current.scrollHeight > 0) {
             chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
         }
-    }, [messages])
+    }, [messages]);
 
     function toggleCollapse() {
-        setCollapase(!collapse);
+        setCollapse(!collapse);
     }
 
     return (
-        <div className={`${styles.container} ${collapse ? styles.collapse : ''}`}>
+        <div className={`${styles.container} ${collapse ? styles.collapsed : ''}`}>
             <div className={styles.chatHeader} onClick={toggleCollapse}>
                 <div className={styles.logo}>
                     <img src="https://cdn-icons-png.flaticon.com/512/14292/14292687.png" alt="cwt" />
@@ -26,6 +25,14 @@ const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter 
                 <div className={styles.chatTitle}>Let's Chat</div>
             </div>
             <div className={styles.chatBody} ref={chatBodyRef}>
+                <div className={styles.userList}>
+                    <p>{users.length} users joined</p>
+                    {
+                        users.map((user) => (
+                            <div key={user}>{user}</div>
+                        ))
+                    }
+                </div>
                 {messages.map((message, index) => (
                     <div key={index} className={message.type === 'outgoing' ? `${styles.outgoing} animate__animated animate__fadeInLeft animate__faster` : `${styles.incoming} animate__animated animate__fadeInRight animate__faster`}>{message.content}</div>
                 ))}
@@ -46,7 +53,7 @@ const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter 
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Window
+export default Window;

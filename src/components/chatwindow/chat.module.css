@@ -2,17 +2,17 @@
   height: 420px;
   width: 350px;
   background-color: var(--light-color);
-  position: fixed;
-  bottom: 50px;
-  right: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
   box-shadow: 0px 0px 15px 0px black;
 }
 
-.collapse {
-  height: 50px;
-  width: 160px;
-  display: flex;
-  align-items: center;
+.collapsed {
+  height: 60px;
+  width: 250px;
 }
 
 .chatHeader {
@@ -30,6 +30,10 @@
   height: 35px;
   width: 35px;
   box-shadow: 0px 0px 8px 0px black;
+}
+
+.chatHeader {
+  z-index: 2; /* Ensures chat header remains on top */
 }
 
 .chatHeader img {
@@ -73,6 +77,10 @@
   border-top: 1px solid #ccc;
 }
 
+.collapsed .chatInput {
+  display: none;
+}
+
 .inputSection {
   flex: 9;
 }
@@ -112,4 +120,12 @@
   width: max-content;
   border-radius: 10px 3px 10px 10px;
   align-self: flex-start;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
