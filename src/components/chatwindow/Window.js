@@ -2,16 +2,23 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from "./chat.module.css";
 import 'animate.css';
 
+// Window component for displaying chat interface
 const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter, users }) => {
+
+    // State to control chat collapse/expand
     const [collapse, setCollapse] = useState(true);
+
+    // Reference to the chat body element for scrolling
     const chatBodyRef = useRef(null);
 
+    // Effect to scroll chat to bottom when new messages are received
     useEffect(() => {
         if (chatBodyRef.current.scrollHeight > 0) {
             chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
         }
     }, [messages]);
 
+    // Function to toggle chat collapse/expand
     function toggleCollapse() {
         setCollapse(!collapse);
     }
@@ -26,6 +33,7 @@ const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter,
             </div>
             <div className={styles.chatBody} ref={chatBodyRef}>
                 <div className={styles.userList}>
+                    {/* Display user list */}
                     <p>{users.length} users joined</p>
                     {
                         users.map((user) => (
@@ -33,6 +41,7 @@ const Window = ({ inputValue, setInputValue, sendMessage, messages, handleEnter,
                         ))
                     }
                 </div>
+                {/* Display chat messages */}
                 {messages.map((message, index) => (
                     <div key={index} className={message.type === 'outgoing' ? `${styles.outgoing} animate__animated animate__fadeInLeft animate__faster` : `${styles.incoming} animate__animated animate__fadeInRight animate__faster`}>{message.content}</div>
                 ))}
